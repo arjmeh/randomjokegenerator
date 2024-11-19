@@ -25,3 +25,8 @@
 .tagline {
     font-size: 2rem;
 }
+.bottom-button {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Space between buttons */
+}
