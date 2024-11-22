@@ -19,6 +19,7 @@
             <h1 class="text">Punny Papa</h1>
             <h2 class="tagline">Pun-ishingly good jokes, courtesy of Punny Papa.</h2>
         </div>
+        
         <div class="secondary-container">
 
 
@@ -27,13 +28,21 @@
         </div>
         <div class="bottom-button">
             
-            <button type="button" class="btn btn-primary btn-lg" id="button"><i class="fa-regular fa-face-smile"></i> Generate!</button>
+            <button type="button" class="btn btn-primary btn-lg" id="button"><i class="fa-regular fa-face-smile" onclick="handleClick()"></i> Generate!</button>
             <button type="button" class="btn btn-secondary btn-lg" id="copybutton"><i class="fa-regular fa-copy"></i> Copy!</button>
             <button type="button" class="btn btn-secondary btn-lg" id="undoButton"><i class="fa-solid fa-rotate-left"></i> Undo</button>
+            <button type="button" class="btn btn-success" id="shareButton">
+                <i class="fa-solid fa-share"></i> Share
+            </button>
             
         </div>
     </div>
+    <p>© 2024 PunnyPapa. All rights reserved.</p>
     </div>
+    <div id="loading" style="display:none;">
+        <i class="fa-solid fa-spinner fa-spin"></i>
+    </div>
+   
     <script src="script.js"></script>
 </body>
 </html>

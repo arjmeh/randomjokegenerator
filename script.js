@@ -5,22 +5,6 @@ let undoButton = document.getElementById('undoButton'); // Get the Undo button
 let previousJoke = ""; // Store the previous joke
 let copybutton = document.getElementById('copybutton')
 
-// // // get the generate joke button
-
-
-// let generateBtn = document.querySelector("#btn");
-
-
-// let API =
-//   "https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single";
-
-//   function acquireJoke() {
-//     fetch(API)
-//       .then((info) => info.json())
-//       .then((item) => {
-//         jokeText.textContent = `${item.joke}`;
-//       });
-//   }
 handleClick()
 async function fetchJoke() {
     const response = await fetch("https://icanhazdadjoke.com", {
@@ -60,3 +44,42 @@ function undoJoke() {
   }
 }
 undoButton.addEventListener("click", undoJoke); // Attach event listener to Undo button
+
+async function handleClick() {
+  document.getElementById("loading").style.display = "block";
+  if (jokeText.textContent) {
+      previousJoke = jokeText.textContent;
+  }
+  const { joke } = await fetchJoke();
+  jokeText.textContent = joke;
+  document.getElementById("loading").style.display = "none";
+}
+
+const shareButton = document.getElementById('shareButton');
+shareButton.addEventListener('click', async () => {
+    const jokeTextContent = document.getElementById('joke').textContent;
+
+    if (navigator.share) {
+        try {
+            await navigator.share({
+                title: 'Check out this pun!',
+                text: jokeTextContent,
+                url: window.location.href, // Optional: Include the current page URL
+            });
+            alert('Joke shared successfully!');
+        } catch (error) {
+            console.error('Error sharing:', error);
+        }
+    } else {
+        alert('Sharing is not supported on this browser.');
+    }
+});
+
+if (!navigator.share) {
+  shareButton.addEventListener('click', () => {
+      const jokeTextContent = document.getElementById('joke').textContent;
+      navigator.clipboard.writeText(jokeTextContent).then(() => {
+          alert('Joke copied to clipboard! Share it anywhere.');
+      });
+  });
+}
